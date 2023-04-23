@@ -1,0 +1,70 @@
+import pygame
+import pytmx
+import pyscroll
+
+from dialogues import DialogBox, LocBox
+from map import MapManager
+from player import Player
+
+class Game:
+    def __init__(self):
+        self.screen = pygame.display.set_mode((900, 700))
+        pygame.display.set_caption("jeu de voyage dans le temps")
+
+        self.player = Player(0, 0)
+        self.map_manager = MapManager(self.screen, self.player)
+
+        self.dialog_box = DialogBox()
+        self.location_box = LocBox(self.screen, self.player)
+
+    def handle_input(self):
+        pressed = pygame.key.get_pressed()
+
+        if pressed[pygame.K_z]:
+            self.player.move_up()
+            self.player.change_animation('up')
+            self.player.speed = 2
+
+        elif pressed[pygame.K_s]:
+            self.player.move_down()
+            self.player.change_animation('down')
+            self.player.speed = 2
+
+        elif pressed[pygame.K_d]:
+            self.player.move_right()
+            self.player.change_animation('right')
+            self.player.speed = 2
+
+        elif pressed[pygame.K_q]:
+            self.player.move_left()
+            self.player.change_animation('left')
+            self.player.speed = 2
+
+    def update(self):
+        self.map_manager.update()
+
+    def run(self):
+
+        clock = pygame.time.Clock()
+
+        print("début")
+
+        running = True
+
+        while running:
+
+            self.player.save_location()
+            self.handle_input()
+            self.update()
+            self.map_manager.draw()
+            self.location_box.render(self.screen)
+            pygame.display.flip()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+
+            clock.tick(64)
+
+
+    pygame.quit()

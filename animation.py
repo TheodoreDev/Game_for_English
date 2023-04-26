@@ -10,7 +10,7 @@ class AnimateSprite(pygame.sprite.Sprite) :
             'down': self.get_images(0),
             'left': self.get_images(0),
             'right': self.get_images(0),
-            'up': self.get_images(0)
+            'up': self.get_images(32)
         }
         self.speed = 2
 

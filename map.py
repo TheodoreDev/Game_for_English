@@ -4,12 +4,16 @@ import pygame
 import pytmx
 import pyscroll
 
+from player import NPC
+
+
 @dataclass
 class Map:
     name: str
     walls: list[pygame.Rect]
     group: pyscroll.PyscrollGroup
     tmx_data: pytmx.TiledMap
+    npcs: list[NPC]
 
 class MapManager:
     def __init__(self, screen, player):
@@ -19,9 +23,12 @@ class MapManager:
         self.current_map = "Tempo Forest"
         self.player_loc = "Tempo Forest"
 
-        self.register_map("Tempo Forest")
+        self.register_map("Tempo Forest", npcs=[
+            NPC("paul", nb_points=4)
+        ])
 
         self.teleport_player("player")
+        self.teleport_npcs()
 
     def check_collision(self):
         for sprite in self.get_group().sprites():
@@ -34,7 +41,7 @@ class MapManager:
         self.player.position[1] = point.y
         self.player.save_location()
 
-    def register_map(self, name):
+    def register_map(self, name, npcs=[]):
         tmx_data = pytmx.util_pygame.load_pygame(f"map/carte (.tmx)/{name}.tmx")
         map_data = pyscroll.data.TiledMapData(tmx_data)
         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
@@ -52,7 +59,10 @@ class MapManager:
         group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=5)
         group.add(self.player)
 
-        self.maps[name] = Map(name, walls, group, tmx_data)
+        for npc in npcs:
+            group.add(npc)
+
+        self.maps[name] = Map(name, walls, group, tmx_data, npcs)
 
     def get_map(self):
         return self.maps[self.current_map]
@@ -69,6 +79,15 @@ class MapManager:
     def get_loc(self):
         return self.get_map().name
 
+    def teleport_npcs(self):
+        for map in self.maps:
+            map_data = self.maps[map]
+            npcs = map_data.npcs
+
+            for npc in npcs:
+                npc.load_points(map_data.tmx_data)
+                npc.teleport_spawn()
+
     def draw(self):
         self.get_group().draw(self.screen)
         self.get_group().center(self.player.rect.center)
@@ -76,4 +95,6 @@ class MapManager:
     def update(self):
         self.get_group().update()
         self.check_collision()
-        print(self.get_loc())
+
+        for npc in self.get_map().npcs:
+            npc.move()

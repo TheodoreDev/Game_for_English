@@ -1,9 +1,9 @@
 import pygame
 
 class AnimateSprite(pygame.sprite.Sprite) :
-    def __init__(self):
+    def __init__(self, name):
         super().__init__()
-        self.spite_sheet = pygame.image.load('image/player/planche cendrillon de face.png')
+        self.spite_sheet = pygame.image.load(f'image/player-PNJ/{name}.png')
         self.animation_index = 0
         self.clock = 0
         self.images = {

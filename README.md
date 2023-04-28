@@ -1,6 +1,6 @@
-# Project Title
+# Game for English
 
-Simple overview of use/purpose.
+A game make for a final task in an English class.
 
 ## Description
 
@@ -15,7 +15,7 @@ An in-depth paragraph about your project and overview of use.
 
 ### Installing
 
-* How/where to download your program
+* Download the project [here](#)
 * Any modifications needed to be made to files/folders
 
 ### Executing program
@@ -37,19 +37,19 @@ command to run if program contains helper info
 
 Contributors names and contact info
 
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
+- Théodore Delbove  ([@theodore.dlb](https://www.instagram.com/theodore.dlb/)), Developer
+- Maxime Miklaszewski, graphic designer
 
 ## Version History
 
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
+* v0.1 (Initial release):
+    * Creation of the map;
+    * Creation of the player;
+    * Creation of NPC;
+    * Creation of the story line
 
 ## License
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+This project is licensed under the Théodore License - see the LICENSE.md file for details
 
 ## Acknowledgments

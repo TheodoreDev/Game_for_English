@@ -136,7 +136,6 @@ class MapManager:
     def update(self):
         self.get_group().update()
         self.check_collision()
-        print(self.player.hide)
 
         for npc in self.get_map().npcs:
             npc.move()

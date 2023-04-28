@@ -6,6 +6,12 @@ import pyscroll
 
 from player import NPC
 
+@dataclass
+class Portal:
+    from_world: str
+    origin_point: str
+    target_world: str
+    teleport_point: str
 
 @dataclass
 class Map:
@@ -13,6 +19,7 @@ class Map:
     walls: list[pygame.Rect]
     group: pyscroll.PyscrollGroup
     tmx_data: pytmx.TiledMap
+    portals: list[Portal]
     npcs: list[NPC]
 
 class MapManager:
@@ -23,14 +30,28 @@ class MapManager:
         self.current_map = "Tempo Forest"
         self.player_loc = "Tempo Forest"
 
-        self.register_map("Tempo Forest", npcs=[
+        self.register_map("Tempo Forest", portals=[
+            Portal(from_world="Tempo Forest", origin_point="enter_ville", target_world="ville", teleport_point="spawn_ville")
+        ], npcs=[
             NPC("paul", nb_points=4)
+        ])
+        self.register_map("ville", portals=[
+            Portal(from_world="ville", origin_point="enter_Tempo-Forest", target_world="Tempo Forest", teleport_point="spawn_Tempo-Forest")
         ])
 
         self.teleport_player("player")
         self.teleport_npcs()
 
     def check_collision(self):
+        for portal in self.get_map().portals:
+            if portal.from_world == self.current_map:
+                point = self.get_object(portal.origin_point)
+                rect = pygame.Rect(point.x, point.y, point.width, point.height)
+                if self.player.feet.colliderect(rect):
+                    copy_portal = portal
+                    self.current_map = portal.target_world
+                    self.teleport_player(copy_portal.teleport_point)
+
         for sprite in self.get_group().sprites():
             if sprite.feet.collidelist(self.get_walls()) > -1:
                 sprite.move_back()
@@ -41,7 +62,7 @@ class MapManager:
         self.player.position[1] = point.y
         self.player.save_location()
 
-    def register_map(self, name, npcs=[]):
+    def register_map(self, name, portals=[], npcs=[]):
         tmx_data = pytmx.util_pygame.load_pygame(f"map/carte (.tmx)/{name}.tmx")
         map_data = pyscroll.data.TiledMapData(tmx_data)
         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
@@ -62,7 +83,7 @@ class MapManager:
         for npc in npcs:
             group.add(npc)
 
-        self.maps[name] = Map(name, walls, group, tmx_data, npcs)
+        self.maps[name] = Map(name, walls, group, tmx_data, portals, npcs)
 
     def get_map(self):
         return self.maps[self.current_map]

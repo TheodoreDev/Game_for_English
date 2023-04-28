@@ -10,8 +10,8 @@ An in-depth paragraph about your project and overview of use.
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+* Windows 10, 11 or more
+* python 3.9 with pygame, pytmx and pyscroll
 
 ### Installing
 
@@ -20,10 +20,10 @@ An in-depth paragraph about your project and overview of use.
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
+* Go with the cmd into the folder of the project;
+* Enter the command below;
 ```
-code blocks for commands
+py -3.9 main.py
 ```
 
 ## Help

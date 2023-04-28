@@ -12,23 +12,36 @@ class Entity(AnimateSprite):
         self.position = [x, y]
         self.feet = pygame.Rect(0, 0, self.rect.width * 0.5, 12)
         self.old_position = self.position.copy()
+        self.hide = False
 
     def save_location(self): self.old_position = self.position.copy()
 
     def move_right(self):
-        self.change_animation("right")
+        if self.hide == True:
+            self.change_animation("right_hide")
+        else:
+            self.change_animation("right")
         self.position[0] += self.speed
 
     def move_left(self):
-        self.change_animation("left")
+        if self.hide == True:
+            self.change_animation("left_hide")
+        else:
+            self.change_animation("left")
         self.position[0] -= self.speed
 
     def move_up(self):
-        self.change_animation("up")
+        if self.hide == True:
+            self.change_animation("up_hide")
+        else:
+            self.change_animation("up")
         self.position[1] -= self.speed
 
     def move_down(self):
-        self.change_animation("down")
+        if self.hide == True:
+            self.change_animation("down_hide")
+        else:
+            self.change_animation("down")
         self.position[1] += self.speed
 
     def update(self):

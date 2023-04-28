@@ -29,6 +29,3 @@ class LocBox:
         screen.blit(self.box, (self.X_POSITION, self.Y_POSITION))
         text = self.font.render(self.text, False, (0, 0, 0))
         screen.blit(text, (self.X_POSITION + 10, self.Y_POSITION + 20))
-
-    def update_text(self):
-        self.text = self.map_manager.get_loc()

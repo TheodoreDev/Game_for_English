@@ -39,6 +39,10 @@ class Game:
 
     def update(self):
         self.map_manager.update()
+        if self.map_manager.current_map == "Tempo Forest":
+            self.location_box.text = "Tempo Forest"
+        elif self.map_manager.current_map == "ville":
+            self.location_box.text = "         City"
 
     def run(self):
 

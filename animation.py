@@ -12,8 +12,8 @@ class AnimateSprite(pygame.sprite.Sprite) :
             'right': self.get_images(0),
             'up': self.get_images(32),
             'down_hide': self.get_images(128),
-            'left_hide': self.get_images(224),
-            'right_hide': self.get_images(192),
+            'left_hide': self.get_images(0),#224
+            'right_hide': self.get_images(0),#192
             'up_hide': self.get_images(160)
         }
         self.speed = 2

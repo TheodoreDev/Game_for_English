@@ -8,12 +8,12 @@ class AnimateSprite(pygame.sprite.Sprite) :
         self.clock = 0
         self.images = {
             'down': self.get_images(0),
-            'left': self.get_images(0),
-            'right': self.get_images(0),
+            'left': self.get_images(64),
+            'right': self.get_images(96),
             'up': self.get_images(32),
             'down_hide': self.get_images(128),
-            'left_hide': self.get_images(0),#224
-            'right_hide': self.get_images(0),#192
+            'left_hide': self.get_images(192),#224
+            'right_hide': self.get_images(224),#192
             'up_hide': self.get_images(160)
         }
         self.speed = 2

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="63">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="69">
  <tileset firstgid="1" source="../Jeu de tuiles (.tsx)/RPG Nature Tileset.tsx"/>
  <tileset firstgid="721" source="../Jeu de tuiles (.tsx)/route6.tsx"/>
  <tileset firstgid="725" source="../Jeu de tuiles (.tsx)/route6.1.tsx"/>
@@ -887,6 +887,9 @@
   <object id="56" type="collision" x="385" y="449" width="30.3333" height="30.6667"/>
   <object id="57" type="collision" x="545" y="368.667" width="30.3333" height="30.3333"/>
   <object id="59" name="buisson" x="352.75" y="1480.75" width="62.5" height="53.5"/>
+  <object id="63" type="collision" x="372.182" y="1034.36" width="23.6364" height="19.8182"/>
+  <object id="67" name="dialogue1" x="397" y="255.333" width="212" height="8"/>
+  <object id="68" name="dialogue2" x="349.667" y="1551.33" width="259.667" height="5.66667"/>
  </objectgroup>
  <objectgroup id="9" name="spawn">
   <object id="48" name="player" x="480" y="207.5">

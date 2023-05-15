@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="53">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="73">
  <tileset firstgid="1" source="../Jeu de tuiles (.tsx)/RPG Nature Tileset.tsx"/>
  <tileset firstgid="721" source="../Jeu de tuiles (.tsx)/route6.1.tsx"/>
  <tileset firstgid="725" source="../Jeu de tuiles (.tsx)/route6.tsx"/>
@@ -394,7 +394,7 @@
   <object id="1" type="collision" x="0" y="480.25" width="16" height="319.75"/>
   <object id="2" type="collision" x="16" y="785" width="768" height="16"/>
   <object id="3" type="collision" x="783" y="796" width="32" height="6"/>
-  <object id="6" type="collision" x="-1.33333" y="160" width="784.67" height="272.333"/>
+  <object id="6" type="collision" x="3.30303" y="160" width="780.034" height="265.667"/>
   <object id="9" name="enter_Tempo-Forest" x="784" y="784.909" width="31.0909" height="10.9091"/>
   <object id="14" name="wheat" x="16" y="495.667" width="766" height="270.333"/>
   <object id="15" type="collision" x="815.333" y="784" width="175.333" height="14.6667"/>
@@ -417,19 +417,24 @@
   <object id="36" type="collision" x="1305" y="545" width="11.5" height="26"/>
   <object id="37" type="collision" x="1098.5" y="591.5" width="9" height="27"/>
   <object id="38" type="collision" x="955" y="704" width="10" height="26"/>
-  <object id="39" type="collision" x="817.165" y="161.833" width="784.67" height="269.667"/>
+  <object id="39" type="collision" x="817.165" y="161.833" width="781.67" height="263.667"/>
   <object id="40" type="collision" x="784.333" y="332.667" width="31.6667" height="44.3333"/>
-  <object id="43" name="dialogue3" x="15" y="496.333" width="1567.67" height="5"/>
-  <object id="48" type="collision" x="1599.27" y="431.636" width="2" height="15.6364"/>
-  <object id="49" name="camaro(1)_path3" x="1616.81" y="127.366" width="15.625" height="15.375"/>
-  <object id="50" name="camaro(1)_path2" x="1616.37" y="443.858" width="15.625" height="15.375"/>
-  <object id="51" name="camaro(1)_path1" x="-31.5625" y="443.813" width="15.625" height="15.375"/>
-  <object id="52" name="camaro(1)_path4" x="-31.3125" y="127.813" width="15.625" height="15.375"/>
+  <object id="43" name="dialogue4" x="15" y="496.333" width="1567.67" height="5"/>
+  <object id="68" name="dialogue3" x="18.3333" y="683" width="1090.5" height="8.5"/>
  </objectgroup>
  <objectgroup id="6" name="spawn">
   <object id="11" name="spawn_ville" x="789" y="731">
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="12" name="NPC_path"/>
+ <objectgroup id="12" name="NPC_path">
+  <object id="63" name="camaro1_path1" x="-48.3125" y="468.13" width="15.625" height="15.375"/>
+  <object id="64" name="camaro1_path4" x="-48.0852" y="96.2216" width="15.625" height="15.375"/>
+  <object id="65" name="camaro1_path3" x="1648.1" y="95.858" width="15.625" height="15.375"/>
+  <object id="66" name="camaro1_path2" x="1648.37" y="468.131" width="15.625" height="15.375"/>
+  <object id="69" name="camaro2_path2" x="-64.3125" y="450.563" width="15.625" height="15.375"/>
+  <object id="70" name="camaro2_path3" x="-64.31" y="96.0625" width="15.625" height="15.375"/>
+  <object id="71" name="camaro2_path4" x="1663.94" y="95.9375" width="15.625" height="15.375"/>
+  <object id="72" name="camaro2_path1" x="1663.94" y="450.56" width="15.625" height="15.375"/>
+ </objectgroup>
 </map>

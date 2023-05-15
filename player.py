@@ -58,13 +58,14 @@ class Player(Entity):
         super().__init__("planche cendrillon de face", 0, 0)
 
 class NPC(Entity):
-    def __init__(self, name, nb_points):
+    def __init__(self, name, nb_points, speed):
         super().__init__(name, 0, 0)
         self.nb_points = nb_points
         self.points = []
         self.name = name
-        self.speed = 1
+        self.speed = speed
         self.current_point = 0
+        self.hidecar = 0
 
     def move(self):
         current_point = self.current_point
@@ -72,6 +73,7 @@ class NPC(Entity):
 
         if target_point >= self.nb_points:
             target_point = 0
+            self.hidecar = 1
 
         current_rect = self.points[current_point]
         target_rect = self.points[target_point]
@@ -84,9 +86,13 @@ class NPC(Entity):
 
         elif current_rect.x > target_rect.x and abs(current_rect.y - target_rect.y) < 3:
             self.move_left()
+            if self.hidecar == 0:
+                self.change_animation("left_hide")
 
         elif current_rect.x < target_rect.x and abs(current_rect.y - target_rect.y) < 3:
             self.move_right()
+            if self.hidecar == 0:
+                self.change_animation("right_hide")
 
         if self.rect.colliderect(target_rect):
             self.current_point = target_point

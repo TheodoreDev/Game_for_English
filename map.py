@@ -4,6 +4,7 @@ import pygame
 import pytmx
 import pyscroll
 
+import player
 from player import NPC
 
 @dataclass
@@ -40,14 +41,15 @@ class MapManager:
         self.register_map("Tempo Forest", portals=[
             Portal(from_world="Tempo Forest", origin_point="enter_ville", target_world="ville", teleport_point="spawn_ville")
         ], npcs=[
-            NPC("paul", nb_points=4)
+            NPC("paul", nb_points=4, speed=1)
         ], hidden_box=[
             HiddenBox(box_hidden_name="buisson", world="Tempo Forest"),
         ])
         self.register_map("ville", portals=[
             Portal(from_world="ville", origin_point="enter_Tempo-Forest", target_world="Tempo Forest", teleport_point="spawn_Tempo-Forest")
-        ],npcs=[
-            NPC("camaro(1)", nb_points=4)
+        ], npcs=[
+            NPC("camaro1", nb_points=4, speed=5),
+            NPC("camaro2", nb_points=4, speed=5)
         ], hidden_box=[
             HiddenBox(box_hidden_name="wheat", world="ville"),
         ])
@@ -66,6 +68,14 @@ class MapManager:
                     self.teleport_player(copy_portal.teleport_point)
 
         for sprite in self.get_group().sprites():
+            if type(sprite) is NPC:
+                if sprite.feet.colliderect(self.player.rect):
+                    sprite.speed = 0
+                else:
+                    if sprite.name == "camaro1" or sprite.name == "camaro2":
+                        sprite.speed = 5
+                    elif sprite.name == "paul":
+                        sprite.speed = 1
             if sprite.feet.collidelist(self.get_walls()) > -1:
                 sprite.move_back()
 

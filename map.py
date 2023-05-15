@@ -46,6 +46,8 @@ class MapManager:
         ])
         self.register_map("ville", portals=[
             Portal(from_world="ville", origin_point="enter_Tempo-Forest", target_world="Tempo Forest", teleport_point="spawn_Tempo-Forest")
+        ],npcs=[
+            NPC("camaro(1)", nb_points=2)
         ], hidden_box=[
             HiddenBox(box_hidden_name="wheat", world="ville"),
         ])

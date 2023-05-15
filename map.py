@@ -47,7 +47,7 @@ class MapManager:
         self.register_map("ville", portals=[
             Portal(from_world="ville", origin_point="enter_Tempo-Forest", target_world="Tempo Forest", teleport_point="spawn_Tempo-Forest")
         ],npcs=[
-            NPC("camaro(1)", nb_points=2)
+            NPC("camaro(1)", nb_points=4)
         ], hidden_box=[
             HiddenBox(box_hidden_name="wheat", world="ville"),
         ])
@@ -88,7 +88,7 @@ class MapManager:
         tmx_data = pytmx.util_pygame.load_pygame(f"map/carte (.tmx)/{name}.tmx")
         map_data = pyscroll.data.TiledMapData(tmx_data)
         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
-        map_layer.zoom = 2
+        map_layer.zoom = 3
 
         walls = []
         loc = []

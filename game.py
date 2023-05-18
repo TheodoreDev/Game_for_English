@@ -2,7 +2,7 @@ import pygame
 import pytmx
 import pyscroll
 
-from dialogues import DialogBox, LocBox
+from dialogues import *
 from map import MapManager
 from player import Player
 from player import Entity
@@ -13,9 +13,9 @@ class Game:
         pygame.display.set_caption("jeu de voyage dans le temps")
 
         self.player = Player()
-        self.map_manager = MapManager(self.screen, self.player)
-
-        self.dialog_box = DialogBox()
+        self.dialog_box = DialogBox1()
+        self.dialog_box_npc = DialogBoxNPC()
+        self.map_manager = MapManager(self.screen, self.player, self.dialog_box_npc)
         self.location_box = LocBox(self.screen, self.player)
 
     def handle_input(self):
@@ -58,12 +58,18 @@ class Game:
             self.handle_input()
             self.update()
             self.map_manager.draw()
+            self.dialog_box.render(self.screen)
             self.location_box.render(self.screen)
+            self.dialog_box_npc.render(self.screen)
             pygame.display.flip()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        self.dialog_box.next_text()
+                        self.map_manager.check_npc_collision(self.dialog_box_npc)
 
             clock.tick(64)
 

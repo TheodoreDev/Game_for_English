@@ -58,12 +58,13 @@ class Player(Entity):
         super().__init__("planche cendrillon de face", 0, 0)
 
 class NPC(Entity):
-    def __init__(self, name, nb_points, speed):
+    def __init__(self, name, nb_points, speed, dialog):
         super().__init__(name, 0, 0)
         self.nb_points = nb_points
         self.points = []
         self.name = name
         self.speed = speed
+        self.dialog = dialog
         self.current_point = 0
         self.hidecar = 0
 

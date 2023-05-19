@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="79">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="80">
  <tileset firstgid="1" source="../Jeu de tuiles (.tsx)/RPG Nature Tileset.tsx"/>
  <tileset firstgid="721" source="../Jeu de tuiles (.tsx)/route6.1.tsx"/>
  <tileset firstgid="725" source="../Jeu de tuiles (.tsx)/route6.tsx"/>
@@ -438,5 +438,6 @@
   <object id="70" name="camaro2_path3" x="-64.31" y="96.0625" width="15.625" height="15.375"/>
   <object id="71" name="camaro2_path4" x="1663.94" y="95.9375" width="15.625" height="15.375"/>
   <object id="72" name="camaro2_path1" x="1663.94" y="450.56" width="15.625" height="15.375"/>
+  <object id="79" name="basket_path1" x="17" y="720.25" width="15.75" height="16"/>
  </objectgroup>
 </map>

@@ -6,7 +6,6 @@ import pyscroll
 
 import player
 from player import NPC
-from dialogues import DialogBox1, DialogBoxNPC, DialogBox2
 
 
 @dataclass
@@ -28,6 +27,16 @@ class DialogsBoxs2:
     dialogs_boxs2_name: str
     world: str
 
+@dataclass
+class DialogsBoxs3:
+    dialogs_boxs3_name: str
+    world: str
+
+@dataclass
+class DialogsBoxs4:
+    dialogs_boxs4_name: str
+    world: str
+
 
 @dataclass
 class Map:
@@ -39,16 +48,22 @@ class Map:
     npcs: list[NPC]
     hidden_box: list[HiddenBox]
     dialogs_boxs2: list[DialogsBoxs2]
+    dialogs_boxs3: list[DialogsBoxs3]
+    dialogs_boxs4: list[DialogsBoxs4]
 
 
 class MapManager:
-    def __init__(self, screen, player, dialogBoxNPC, dialogBox, dialogBox2):
+    def __init__(self, screen, player, dialogBoxNPC, dialogBoxNPC2, dialogBoxOBJ, dialogBox, dialogBox2, dialogBox3, dialogBox4):
         self.maps = dict()
         self.screen = screen
         self.player = player
         self.dialog_box = dialogBox
         self.dialog_box2 = dialogBox2
+        self.dialog_box3 = dialogBox3
+        self.dialog_box4 = dialogBox4
         self.dialog_box_npc = dialogBoxNPC
+        self.dialog_box_npc2 = dialogBoxNPC2
+        self.dialog_box_obj = dialogBoxOBJ
         self.current_map = "Tempo Forest"
         self.player_loc = "Tempo Forest"
 
@@ -74,6 +89,7 @@ class MapManager:
                                                       "next to the city,",
                                                       "A screwdriver in the tool shop of the city,",
                                                       "And a car in the parking of the city",
+                                                      "The city is in the south.",
                                                       "Ok"])
         ], hidden_box=[
             HiddenBox(box_hidden_name="buisson", world="Tempo Forest"),
@@ -85,20 +101,30 @@ class MapManager:
                    teleport_point="spawn_Tempo-Forest")
         ], npcs=[
             NPC("camaro1", nb_points=4, speed=5, dialog=["VROOMMMM"]),
-            NPC("camaro2", nb_points=4, speed=5, dialog=["VROOMMMM"])
+            NPC("camaro2", nb_points=4, speed=5, dialog=["VROOMMMM"]),
+            NPC("basket", nb_points=1, speed=0, dialog=["Hum, it must be the shoes."])
         ], hidden_box=[
             HiddenBox(box_hidden_name="wheat", world="ville"),
+        ], dialogs_boxs3=[
+            DialogsBoxs3(dialogs_boxs3_name="dialogue3", world="ville")
+        ], dialogs_boxs4=[
+            DialogsBoxs4(dialogs_boxs4_name="dialogue4", world="ville")
         ])
 
         self.teleport_player("player")
         self.teleport_npcs()
 
-    def check_npc_collision(self, dialog_box_npc):
+    def check_npc_collision(self, dialog_box_npc, dialog_box_npc2, dialog_box_obj):
         for sprite in self.get_group().sprites():
             if self.dialog_box.reading == False:
                 if sprite.feet.colliderect(self.player.rect) and type(sprite) is NPC:
-                    dialog_box_npc.execute(sprite.dialog)
-                    print("ok")
+                    if sprite.name == "paul":
+                        dialog_box_npc.execute(sprite.dialog)
+                    elif sprite.name == "basket" or sprite.name == "boche(lino)" or sprite.name == "camaro":
+                        dialog_box_obj.execute(sprite.dialog)
+                    else:
+                        dialog_box_npc2.execute(sprite.dialog)
+
 
     def check_dialogBox_collision(self, dialog_box2):
         for dialogs in self.get_map().dialogs_boxs2:
@@ -106,7 +132,29 @@ class MapManager:
                 point = self.get_object(dialogs.dialogs_boxs2_name)
                 rect = pygame.Rect(point.x, point.y, point.width, point.height)
                 if self.player.feet.colliderect(rect):
-                    dialog_box2.execute()
+                    if self.dialog_box_npc.dialog_read == True:
+                        if self.dialog_box2.dialogue_num < 2:
+                            dialog_box2.execute()
+
+    def check_dialogBox3_collision(self, dialog_box3):
+        for dialogs in self.get_map().dialogs_boxs3:
+            if dialogs.world == self.current_map:
+                point = self.get_object(dialogs.dialogs_boxs3_name)
+                rect = pygame.Rect(point.x, point.y, point.width, point.height)
+                if self.player.feet.colliderect(rect):
+                    if self.dialog_box2.dialogue_num == 2:
+                        if self.dialog_box3.dialogue_num < 3:
+                            dialog_box3.execute()
+
+    def check_dialogBox4_collision(self, dialog_box4):
+        for dialogs in self.get_map().dialogs_boxs4:
+            if dialogs.world == self.current_map:
+                point = self.get_object(dialogs.dialogs_boxs4_name)
+                rect = pygame.Rect(point.x, point.y, point.width, point.height)
+                if self.player.feet.colliderect(rect):
+                    if self.dialog_box3.dialogue_num == 3:
+                        if self.dialog_box4.dialogue_num < 4:
+                            dialog_box4.execute()
 
     def check_collision(self):
         for portal in self.get_map().portals:
@@ -114,14 +162,10 @@ class MapManager:
                 point = self.get_object(portal.origin_point)
                 rect = pygame.Rect(point.x, point.y, point.width, point.height)
                 if self.player.feet.colliderect(rect):
-                    print("collid ok")
-                    if self.dialog_box_npc.dialog_read == True:
-                        print("past ok")
+                    if self.dialog_box2.dialogue_num == 2:
                         copy_portal = portal
                         self.current_map = portal.target_world
                         self.teleport_player(copy_portal.teleport_point)
-                    else:
-                        print("no")
 
         for sprite in self.get_group().sprites():
             if type(sprite) is NPC:
@@ -150,7 +194,7 @@ class MapManager:
         self.player.position[1] = point.y
         self.player.save_location()
 
-    def register_map(self, name, portals=[], npcs=[], hidden_box=[], dialogs_boxs2=[]):
+    def register_map(self, name, portals=[], npcs=[], hidden_box=[], dialogs_boxs2=[], dialogs_boxs3=[], dialogs_boxs4=[]):
         tmx_data = pytmx.util_pygame.load_pygame(f"map/carte (.tmx)/{name}.tmx")
         map_data = pyscroll.data.TiledMapData(tmx_data)
         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
@@ -171,7 +215,7 @@ class MapManager:
         for npc in npcs:
             group.add(npc)
 
-        self.maps[name] = Map(name, walls, group, tmx_data, portals, npcs, hidden_box, dialogs_boxs2)
+        self.maps[name] = Map(name, walls, group, tmx_data, portals, npcs, hidden_box, dialogs_boxs2, dialogs_boxs3, dialogs_boxs4)
 
     def get_map(self):
         return self.maps[self.current_map]

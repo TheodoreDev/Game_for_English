@@ -14,9 +14,13 @@ class Game:
 
         self.player = Player()
         self.dialog_box = DialogBox1()
-        self.dialog_box2 = DialogBox2()
+        self.dialog_box2 = DialogBox2(self.dialog_box)
+        self.dialog_box3 = DialogBox3(self.dialog_box2)
+        self.dialog_box4 = DialogBox4(self.dialog_box3)
         self.dialog_box_npc = DialogBoxNPC()
-        self.map_manager = MapManager(self.screen, self.player, self.dialog_box_npc, self.dialog_box, self.dialog_box2)
+        self.dialog_box_npc2 = DialogBoxNPC2()
+        self.dialog_box_obj = DialogBoxNPCobj()
+        self.map_manager = MapManager(self.screen, self.player, self.dialog_box_npc, self.dialog_box_npc2, self.dialog_box_obj, self.dialog_box, self.dialog_box2, self.dialog_box3, self.dialog_box4)
         self.location_box = LocBox(self.screen, self.player)
 
     def handle_input(self):
@@ -45,6 +49,8 @@ class Game:
         elif self.map_manager.current_map == "ville":
             self.location_box.text = "         City"
         self.map_manager.check_dialogBox_collision(self.dialog_box2)
+        self.map_manager.check_dialogBox3_collision(self.dialog_box3)
+        self.map_manager.check_dialogBox4_collision(self.dialog_box4)
 
     def run(self):
 
@@ -57,13 +63,18 @@ class Game:
         while running:
 
             self.player.save_location()
-            self.handle_input()
+            if self.dialog_box_npc.reading == False and self.dialog_box.reading == False and self.dialog_box2.reading == False and self.dialog_box3.reading == False and self.dialog_box4.reading == False:
+                self.handle_input()
             self.update()
             self.map_manager.draw()
             self.dialog_box.render(self.screen)
             self.dialog_box2.render(self.screen)
+            self.dialog_box3.render(self.screen)
+            self.dialog_box4.render(self.screen)
             self.location_box.render(self.screen)
             self.dialog_box_npc.render(self.screen)
+            self.dialog_box_npc2.render(self.screen)
+            self.dialog_box_obj.render(self.screen)
             pygame.display.flip()
 
             for event in pygame.event.get():
@@ -71,9 +82,15 @@ class Game:
                     running = False
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
-                        self.dialog_box.next_text()
-                        self.dialog_box2.next_text()
-                        self.map_manager.check_npc_collision(self.dialog_box_npc)
+                        if self.dialog_box.reading:
+                            self.dialog_box.next_text()
+                        if self.dialog_box2.reading:
+                            self.dialog_box2.next_text()
+                        if self.dialog_box3.reading:
+                            self.dialog_box3.next_text()
+                        if self.dialog_box4.reading:
+                            self.dialog_box4.next_text()
+                        self.map_manager.check_npc_collision(self.dialog_box_npc, self.dialog_box_npc2, self.dialog_box_obj)
 
             clock.tick(64)
 

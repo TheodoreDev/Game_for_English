@@ -81,19 +81,25 @@ class NPC(Entity):
 
         if current_rect.y < target_rect.y and abs(current_rect.x - target_rect.x) < 3:
             self.move_down()
+            if self.hidecar == 0:
+                self.speed = 30
 
         elif current_rect.y > target_rect.y and abs(current_rect.x - target_rect.x) < 3:
             self.move_up()
+            if self.hidecar == 0:
+                self.speed = 30
 
         elif current_rect.x > target_rect.x and abs(current_rect.y - target_rect.y) < 3:
             self.move_left()
             if self.hidecar == 0:
                 self.change_animation("left_hide")
+                self.speed = 30
 
         elif current_rect.x < target_rect.x and abs(current_rect.y - target_rect.y) < 3:
             self.move_right()
             if self.hidecar == 0:
                 self.change_animation("right_hide")
+                self.speed = 30
 
         if self.rect.colliderect(target_rect):
             self.current_point = target_point

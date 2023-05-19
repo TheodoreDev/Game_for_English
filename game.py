@@ -14,8 +14,9 @@ class Game:
 
         self.player = Player()
         self.dialog_box = DialogBox1()
+        self.dialog_box2 = DialogBox2()
         self.dialog_box_npc = DialogBoxNPC()
-        self.map_manager = MapManager(self.screen, self.player, self.dialog_box_npc)
+        self.map_manager = MapManager(self.screen, self.player, self.dialog_box_npc, self.dialog_box, self.dialog_box2)
         self.location_box = LocBox(self.screen, self.player)
 
     def handle_input(self):
@@ -43,6 +44,7 @@ class Game:
             self.location_box.text = "Tempo Forest"
         elif self.map_manager.current_map == "ville":
             self.location_box.text = "         City"
+        self.map_manager.check_dialogBox_collision(self.dialog_box2)
 
     def run(self):
 
@@ -59,6 +61,7 @@ class Game:
             self.update()
             self.map_manager.draw()
             self.dialog_box.render(self.screen)
+            self.dialog_box2.render(self.screen)
             self.location_box.render(self.screen)
             self.dialog_box_npc.render(self.screen)
             pygame.display.flip()
@@ -69,6 +72,7 @@ class Game:
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         self.dialog_box.next_text()
+                        self.dialog_box2.next_text()
                         self.map_manager.check_npc_collision(self.dialog_box_npc)
 
             clock.tick(64)

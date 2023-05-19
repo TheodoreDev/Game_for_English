@@ -6,7 +6,7 @@ import pyscroll
 
 import player
 from player import NPC
-from dialogues import DialogBox1, DialogBoxNPC
+from dialogues import DialogBox1, DialogBoxNPC, DialogBox2
 
 
 @dataclass
@@ -24,8 +24,8 @@ class HiddenBox:
 
 
 @dataclass
-class DialogsBoxs:
-    dialogs_boxs_name: str
+class DialogsBoxs2:
+    dialogs_boxs2_name: str
     world: str
 
 
@@ -38,15 +38,16 @@ class Map:
     portals: list[Portal]
     npcs: list[NPC]
     hidden_box: list[HiddenBox]
-    dialogs_boxs: list[DialogsBoxs]
+    dialogs_boxs2: list[DialogsBoxs2]
 
 
 class MapManager:
-    def __init__(self, screen, player, dialogBoxNPC):
+    def __init__(self, screen, player, dialogBoxNPC, dialogBox, dialogBox2):
         self.maps = dict()
         self.screen = screen
         self.player = player
-        self.dialog_box = DialogBox1()
+        self.dialog_box = dialogBox
+        self.dialog_box2 = dialogBox2
         self.dialog_box_npc = dialogBoxNPC
         self.current_map = "Tempo Forest"
         self.player_loc = "Tempo Forest"
@@ -76,8 +77,8 @@ class MapManager:
                                                       "Ok"])
         ], hidden_box=[
             HiddenBox(box_hidden_name="buisson", world="Tempo Forest"),
-        ], dialogs_boxs=[
-            DialogsBoxs(dialogs_boxs_name="dialogue1", world="Tempo Forest"),
+        ], dialogs_boxs2=[
+            DialogsBoxs2(dialogs_boxs2_name="dialogue2", world="Tempo Forest")
         ])
         self.register_map("ville", portals=[
             Portal(from_world="ville", origin_point="enter_Tempo-Forest", target_world="Tempo Forest",
@@ -94,12 +95,20 @@ class MapManager:
 
     def check_npc_collision(self, dialog_box_npc):
         for sprite in self.get_group().sprites():
-            if sprite.feet.colliderect(self.player.rect) and type(sprite) is NPC:
-                dialog_box_npc.execute(sprite.dialog)
-                print("ok")
+            if self.dialog_box.reading == False:
+                if sprite.feet.colliderect(self.player.rect) and type(sprite) is NPC:
+                    dialog_box_npc.execute(sprite.dialog)
+                    print("ok")
+
+    def check_dialogBox_collision(self, dialog_box2):
+        for dialogs in self.get_map().dialogs_boxs2:
+            if dialogs.world == self.current_map:
+                point = self.get_object(dialogs.dialogs_boxs2_name)
+                rect = pygame.Rect(point.x, point.y, point.width, point.height)
+                if self.player.feet.colliderect(rect):
+                    dialog_box2.execute()
 
     def check_collision(self):
-        print(self.dialog_box_npc.dialog_read)
         for portal in self.get_map().portals:
             if portal.from_world == self.current_map:
                 point = self.get_object(portal.origin_point)
@@ -141,7 +150,7 @@ class MapManager:
         self.player.position[1] = point.y
         self.player.save_location()
 
-    def register_map(self, name, portals=[], npcs=[], hidden_box=[], dialogs_boxs=[]):
+    def register_map(self, name, portals=[], npcs=[], hidden_box=[], dialogs_boxs2=[]):
         tmx_data = pytmx.util_pygame.load_pygame(f"map/carte (.tmx)/{name}.tmx")
         map_data = pyscroll.data.TiledMapData(tmx_data)
         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
@@ -162,7 +171,7 @@ class MapManager:
         for npc in npcs:
             group.add(npc)
 
-        self.maps[name] = Map(name, walls, group, tmx_data, portals, npcs, hidden_box, dialogs_boxs)
+        self.maps[name] = Map(name, walls, group, tmx_data, portals, npcs, hidden_box, dialogs_boxs2)
 
     def get_map(self):
         return self.maps[self.current_map]

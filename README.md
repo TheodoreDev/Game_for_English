@@ -16,7 +16,7 @@ An in-depth paragraph about your project and overview of use.
 ### Installing
 
 * Download the project [here](#)
-* Any modifications needed to be made to files/folders
+* No modifications needed
 
 ### Executing program
 
@@ -37,8 +37,8 @@ command to run if program contains helper info
 
 Contributors names and contact info
 
-- Théodore Delbove  ([@theodore.dlb](https://www.instagram.com/theodore.dlb/)), Developer
-- Maxime Miklaszewski, graphic designer
+- Théodore Delbove  ([@theodore.dlb](https://www.instagram.com/theodore.dlb/), [ThéodoreDev](https://github.com/TheodoreDev)) : Developer
+- Maxime Miklaszewski : graphic designer
 
 ## Version History
 

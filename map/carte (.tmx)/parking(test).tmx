@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="8">
+ <tileset firstgid="1" source="../Jeu de tuiles (.tsx)/parking_ground.tsx"/>
+ <tileset firstgid="5" source="../Jeu de tuiles (.tsx)/terrain_3.tsx"/>
+ <tileset firstgid="4101" source="../Jeu de tuiles (.tsx)/route6.1.tsx"/>
+ <tileset firstgid="4105" source="../Jeu de tuiles (.tsx)/route6.tsx"/>
+ <tileset firstgid="4109" source="../Jeu de tuiles (.tsx)/parking_ground2.tsx"/>
+ <tileset firstgid="4113" source="../Jeu de tuiles (.tsx)/parking_ground_terminus.tsx"/>
+ <layer id="1" name="ground" width="13" height="13">
+  <data encoding="csv">
+1869,1870,1869,1870,1869,1870,1869,1870,1869,1870,1869,1870,1869,
+1933,1934,1933,1934,1933,1934,1933,1934,1933,1934,1933,1934,1933,
+1869,1870,1869,1870,1869,1870,1869,1870,1869,1870,1869,1870,1869,
+1933,1934,1933,1934,1933,1934,1933,1934,1933,1934,1933,1934,1933,
+1869,1870,1869,1870,1869,1870,1869,1870,1869,1870,1869,1870,1869,
+1933,1934,1933,1934,1933,1934,1933,1934,1933,1934,1933,1934,1933,
+1869,1870,1869,1870,1869,1870,1869,1870,1869,1870,1869,1870,1869,
+1933,1934,1933,1934,1933,1934,1933,1934,1933,1934,1933,1934,1933,
+1869,1870,1869,1870,1869,1870,1869,1870,1869,1870,1869,1870,1869,
+1933,1934,1933,1934,1933,1934,1933,1934,1933,1934,1933,1934,1933,
+1869,1870,1869,1870,1869,1870,1869,1870,1869,1870,1869,1870,1869,
+1933,1934,1933,1934,1933,1934,1933,1934,1933,1934,1933,1934,1933,
+1869,1870,1869,1870,1869,1870,1869,1870,1869,1870,1869,1870,1869
+</data>
+ </layer>
+ <layer id="2" name="ground2" width="13" height="13">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+4113,4114,0,0,0,0,0,0,0,0,0,2147487762,2147487761,
+4115,4116,0,0,0,0,0,0,0,0,0,2147487764,2147487763,
+4111,4112,0,0,0,0,0,0,0,0,0,3,4,
+4111,4112,0,0,0,0,0,0,0,0,0,3,4,
+4111,4112,0,0,0,0,0,0,0,0,0,3,4,
+4111,4112,0,0,0,0,0,0,0,0,0,3,4,
+4111,4112,0,0,0,0,0,0,0,0,0,3,4,
+4111,4112,0,0,0,0,0,0,0,0,0,3,4,
+4111,4112,0,0,0,0,0,0,0,0,0,3,4,
+0,0,0,0,0,0,4105,4102,0,0,0,0,0,
+0,0,0,0,0,0,4107,4104,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="3" name="collision">
+  <object id="1" type="collision" x="207.5" y="-0.5" width="10.5" height="208.5"/>
+  <object id="2" type="collision" x="0" y="207.5" width="210" height="12.5"/>
+  <object id="3" type="collision" x="-16.5" y="-1" width="16.5" height="208.5"/>
+  <object id="4" type="collision" x="-2.5" y="-17.5" width="210.5" height="17.5"/>
+  <object id="7" name="enter_ville" x="97" y="193.545" width="31.0909" height="14"/>
+ </objectgroup>
+ <objectgroup id="4" name="spawn">
+  <object id="5" name="spawn_parking" x="95.8182" y="143.636">
+   <point/>
+  </object>
+ </objectgroup>
+</map>

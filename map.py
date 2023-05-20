@@ -90,7 +90,10 @@ class MapManager:
                                                       "A screwdriver in the tool shop of the city,",
                                                       "And a car in the parking of the city",
                                                       "The city is in the south.",
-                                                      "Ok"])
+                                                      "Ok",
+                                                      "And you can now see your localisation",
+                                                      "in the top left hand corner,",
+                                                      "And your inventory in the other corner"])
         ], hidden_box=[
             HiddenBox(box_hidden_name="buisson", world="Tempo Forest"),
         ], dialogs_boxs2=[
@@ -100,7 +103,9 @@ class MapManager:
             Portal(from_world="ville", origin_point="enter_Tempo-Forest", target_world="Tempo Forest",
                    teleport_point="spawn_Tempo-Forest"),
             Portal(from_world="ville", origin_point="enter_parking", target_world="parking",
-                   teleport_point="spawn_parking")
+                   teleport_point="spawn_parking"),
+            Portal(from_world="ville", origin_point="enter_tool", target_world="tool_shop",
+                   teleport_point="spawn_tool")
         ], npcs=[
             NPC("camaro1", nb_points=4, speed=5, dialog=["VROOMMMM"]),
             NPC("camaro2", nb_points=4, speed=5, dialog=["VROOMMMM"]),
@@ -117,6 +122,12 @@ class MapManager:
                    teleport_point="spawn_ville2")
         ], npcs=[
             NPC(name="camaro", nb_points=1, speed=0, dialog=["Hum ...", "Maybe this is the car", "It looks like a carriage,", "but without horses", "I take it."])
+        ])
+        self.register_map("tool_shop", portals=[
+            Portal(from_world="tool_shop", origin_point="enter_ville", target_world="ville",
+                   teleport_point="spawn_ville3")
+        ], npcs=[
+            NPC(name="boche(lino)", nb_points=1, speed=0, dialog=["Maybe this is the screwdriver,", "we are in tool shop.", "I take it and we will see."])
         ])
 
         self.teleport_player("player")
@@ -141,6 +152,8 @@ class MapManager:
                     elif sprite.name == "boche(lino)":
                         if self.dialog_box_obj.dialog_read_bosch == False:
                             dialog_box_obj.execute(sprite.dialog)
+                            if self.dialog_box_obj.reading == False:
+                                self.dialog_box_obj.dialog_read_bosch = True
                     else:
                         dialog_box_npc2.execute(sprite.dialog)
 

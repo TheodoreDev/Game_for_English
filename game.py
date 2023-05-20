@@ -90,11 +90,12 @@ class Game:
             self.dialog_box2.render(self.screen)
             self.dialog_box3.render(self.screen)
             self.dialog_box4.render(self.screen)
-            self.location_box.render(self.screen)
-            self.inventory_box.render(self.screen)
             self.dialog_box_npc.render(self.screen)
             self.dialog_box_npc2.render(self.screen)
             self.dialog_box_obj.render(self.screen)
+            if self.dialog_box_npc.dialog_read == True:
+                self.location_box.render(self.screen)
+                self.inventory_box.render(self.screen)
             pygame.display.flip()
 
             for event in pygame.event.get():

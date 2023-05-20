@@ -85,7 +85,7 @@ class MapManager:
                                                       "Sure ...",
                                                       "Just, I need a little help.",
                                                       "Everything you want !",
-                                                      "Ok, go find shoes in a fields ",
+                                                      "Ok, go find shoes in a field",
                                                       "next to the city,",
                                                       "A screwdriver in the tool shop of the city,",
                                                       "And a car in the parking of the city",

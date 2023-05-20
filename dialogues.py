@@ -81,7 +81,7 @@ class DialogBox3:
     def __init__(self, dialogBox2):
         self.box = pygame.image.load('image/dialogue/dialog_box.png')
         self.box = pygame.transform.scale(self.box, (550, 100))
-        self.texts = ["Ok now I'm sure the city isn't far,", "I see the fields.", "But I never saw this type of path before", "I have to be careful,", "I don't know this place", "I'll go explore."]
+        self.texts = ["Ok now I'm sure the city isn't far,", "I see the field.", "But I never saw this type of path before", "I have to be careful,", "I don't know this place", "I'll go explore."]
         self.text_index = 0
         self.letter_index = 0
         self.font = pygame.font.Font("image/dialogue/dialog_font.ttf", 18)
@@ -120,7 +120,7 @@ class DialogBox4:
     def __init__(self, dialogBox3):
         self.box = pygame.image.load('image/dialogue/dialog_box.png')
         self.box = pygame.transform.scale(self.box, (550, 100))
-        self.texts = ["Wow ...", "The cities of the year 2023,", "It's beautiful and impressive !", "It's magic."]
+        self.texts = ["Wow ...", "The city of the year 2023,", "It's beautiful and impressive !", "It's magic."]
         self.text_index = 0
         self.letter_index = 0
         self.font = pygame.font.Font("image/dialogue/dialog_font.ttf", 18)
@@ -182,7 +182,7 @@ class DialogBoxNPC:
             text = self.font.render(self.texts[self.text_index][0:self.letter_index], False, (0, 0, 0))
             screen.blit(text, (self.X_POSITION + 40, self.Y_POSITION + 20))
             if self.dialog_read:
-                self.texts = ["Go find shoes in a fields ",
+                self.texts = ["Go find shoes in a field ",
                               "next to the city,",
                               "A screwdriver in the tool shop of the city,",
                               "And a car in the parking of the city.",

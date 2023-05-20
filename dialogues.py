@@ -245,6 +245,9 @@ class DialogBoxNPCobj:
         self.letter_index = 0
         self.font = pygame.font.Font("image/dialogue/dialog_font.ttf", 18)
         self.reading = False
+        self.dialog_read_camaro = False
+        self.dialog_read_shoes = False
+        self.dialog_read_bosch = False
 
     def execute(self, dialog=[]):
         if self.reading:
@@ -288,3 +291,17 @@ class LocBox:
         screen.blit(self.box, (self.X_POSITION, self.Y_POSITION))
         text = self.font.render(self.text, False, (0, 0, 0))
         screen.blit(text, (self.X_POSITION + 10, self.Y_POSITION + 20))
+
+class InventoryBox:
+
+    X_POSITION = 800
+    Y_POSITION = 0
+
+    def __init__(self, dialogObj):
+        self.name = "HUD_obj0"
+        self.box = pygame.image.load(f'image/dialogue/{self.name}.png')
+        self.dialog_obj = dialogObj
+
+    def render(self, screen):
+        self.box = pygame.image.load(f'image/dialogue/{self.name}.png')
+        screen.blit(self.box, (self.X_POSITION, self.Y_POSITION))

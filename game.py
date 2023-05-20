@@ -22,6 +22,7 @@ class Game:
         self.dialog_box_obj = DialogBoxNPCobj()
         self.map_manager = MapManager(self.screen, self.player, self.dialog_box_npc, self.dialog_box_npc2, self.dialog_box_obj, self.dialog_box, self.dialog_box2, self.dialog_box3, self.dialog_box4)
         self.location_box = LocBox(self.screen, self.player)
+        self.inventory_box = InventoryBox(self.dialog_box_obj)
 
     def handle_input(self):
         pressed = pygame.key.get_pressed()
@@ -48,9 +49,27 @@ class Game:
             self.location_box.text = "Tempo Forest"
         elif self.map_manager.current_map == "ville":
             self.location_box.text = "         City"
+        elif self.map_manager.current_map == "parking":
+            self.location_box.text = "     Parking"
         self.map_manager.check_dialogBox_collision(self.dialog_box2)
         self.map_manager.check_dialogBox3_collision(self.dialog_box3)
         self.map_manager.check_dialogBox4_collision(self.dialog_box4)
+        if self.dialog_box_obj.dialog_read_camaro == True and self.dialog_box_obj.dialog_read_bosch == False and self.dialog_box_obj.dialog_read_shoes == False:
+            self.inventory_box.name = "HUD_obj1"
+        elif self.dialog_box_obj.dialog_read_camaro == True and self.dialog_box_obj.dialog_read_bosch == True and self.dialog_box_obj.dialog_read_shoes == False:
+            self.inventory_box.name = "HUD_obj2"
+        elif self.dialog_box_obj.dialog_read_camaro == True and self.dialog_box_obj.dialog_read_bosch == False and self.dialog_box_obj.dialog_read_shoes == True:
+            self.inventory_box.name = "HUD_obj2-2"
+        elif self.dialog_box_obj.dialog_read_camaro == False and self.dialog_box_obj.dialog_read_bosch == True and self.dialog_box_obj.dialog_read_shoes == False:
+            self.inventory_box.name = "HUD_obj1-2"
+        elif self.dialog_box_obj.dialog_read_camaro == False and self.dialog_box_obj.dialog_read_bosch == True and self.dialog_box_obj.dialog_read_shoes == True:
+            self.inventory_box.name = "HUD_obj2-3"
+        elif self.dialog_box_obj.dialog_read_camaro == False and self.dialog_box_obj.dialog_read_bosch == False and self.dialog_box_obj.dialog_read_shoes == True:
+            self.inventory_box.name = "HUD_obj1-3"
+        elif self.dialog_box_obj.dialog_read_camaro == True and self.dialog_box_obj.dialog_read_bosch == True and self.dialog_box_obj.dialog_read_shoes == True:
+            self.inventory_box.name = "HUD_obj3"
+        else:
+            self.inventory_box.name = "HUD_obj0"
 
     def run(self):
 
@@ -72,6 +91,7 @@ class Game:
             self.dialog_box3.render(self.screen)
             self.dialog_box4.render(self.screen)
             self.location_box.render(self.screen)
+            self.inventory_box.render(self.screen)
             self.dialog_box_npc.render(self.screen)
             self.dialog_box_npc2.render(self.screen)
             self.dialog_box_obj.render(self.screen)

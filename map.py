@@ -98,17 +98,25 @@ class MapManager:
         ])
         self.register_map("ville", portals=[
             Portal(from_world="ville", origin_point="enter_Tempo-Forest", target_world="Tempo Forest",
-                   teleport_point="spawn_Tempo-Forest")
+                   teleport_point="spawn_Tempo-Forest"),
+            Portal(from_world="ville", origin_point="enter_parking", target_world="parking",
+                   teleport_point="spawn_parking")
         ], npcs=[
             NPC("camaro1", nb_points=4, speed=5, dialog=["VROOMMMM"]),
             NPC("camaro2", nb_points=4, speed=5, dialog=["VROOMMMM"]),
-            NPC("basket", nb_points=1, speed=0, dialog=["Hum, it must be the shoes."])
+            NPC("basket", nb_points=1, speed=0, dialog=["Hum, it must be the shoes.", "I take them"])
         ], hidden_box=[
             HiddenBox(box_hidden_name="wheat", world="ville"),
         ], dialogs_boxs3=[
             DialogsBoxs3(dialogs_boxs3_name="dialogue3", world="ville")
         ], dialogs_boxs4=[
             DialogsBoxs4(dialogs_boxs4_name="dialogue4", world="ville")
+        ])
+        self.register_map("parking", portals=[
+            Portal(from_world="parking", origin_point="enter_ville", target_world="ville",
+                   teleport_point="spawn_ville2")
+        ], npcs=[
+            NPC(name="camaro", nb_points=1, speed=0, dialog=["Hum ...", "Maybe this is the car", "It looks like a carriage,", "but without horses", "I take it."])
         ])
 
         self.teleport_player("player")
@@ -120,8 +128,19 @@ class MapManager:
                 if sprite.feet.colliderect(self.player.rect) and type(sprite) is NPC:
                     if sprite.name == "paul":
                         dialog_box_npc.execute(sprite.dialog)
-                    elif sprite.name == "basket" or sprite.name == "boche(lino)" or sprite.name == "camaro":
-                        dialog_box_obj.execute(sprite.dialog)
+                    elif sprite.name == "camaro":
+                        if self.dialog_box_obj.dialog_read_camaro == False:
+                            dialog_box_obj.execute(sprite.dialog)
+                            if self.dialog_box_obj.reading == False:
+                                self.dialog_box_obj.dialog_read_camaro = True
+                    elif sprite.name == "basket":
+                        if self.dialog_box_obj.dialog_read_shoes == False:
+                            dialog_box_obj.execute(sprite.dialog)
+                            if self.dialog_box_obj.reading == False:
+                                self.dialog_box_obj.dialog_read_shoes = True
+                    elif sprite.name == "boche(lino)":
+                        if self.dialog_box_obj.dialog_read_bosch == False:
+                            dialog_box_obj.execute(sprite.dialog)
                     else:
                         dialog_box_npc2.execute(sprite.dialog)
 
@@ -162,10 +181,10 @@ class MapManager:
                 point = self.get_object(portal.origin_point)
                 rect = pygame.Rect(point.x, point.y, point.width, point.height)
                 if self.player.feet.colliderect(rect):
-                    if self.dialog_box2.dialogue_num == 2:
-                        copy_portal = portal
-                        self.current_map = portal.target_world
-                        self.teleport_player(copy_portal.teleport_point)
+                    #if self.dialog_box2.dialogue_num == 2:
+                    copy_portal = portal
+                    self.current_map = portal.target_world
+                    self.teleport_player(copy_portal.teleport_point)
 
         for sprite in self.get_group().sprites():
             if type(sprite) is NPC:

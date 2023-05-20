@@ -1,4 +1,5 @@
 import pygame
+import time
 
 class DialogBox1:
 
@@ -155,7 +156,7 @@ class DialogBoxNPC:
 
     X_POSITION = 180
     Y_POSITION = 590
-    def __init__(self):
+    def __init__(self, dialogObj):
         self.box = pygame.image.load('image/dialogue/dialog_box.png')
         self.box = pygame.transform.scale(self.box, (550, 100))
         self.texts = []
@@ -164,6 +165,8 @@ class DialogBoxNPC:
         self.font = pygame.font.Font("image/dialogue/dialog_font.ttf", 18)
         self.reading = False
         self.dialog_read = False
+        self.dialogObj = dialogObj
+        self.end = False
 
     def execute(self, dialog=[]):
         if self.reading:
@@ -181,12 +184,6 @@ class DialogBoxNPC:
             screen.blit(self.box, (self.X_POSITION, self.Y_POSITION))
             text = self.font.render(self.texts[self.text_index][0:self.letter_index], False, (0, 0, 0))
             screen.blit(text, (self.X_POSITION + 40, self.Y_POSITION + 20))
-            if self.dialog_read:
-                self.texts = ["Go find shoes in a field ",
-                              "next to the city,",
-                              "A screwdriver in the tool shop of the city,",
-                              "And a car in the parking of the city.",
-                              "The city is in the south."]
 
     def next_text(self):
         self.text_index += 1
@@ -305,3 +302,19 @@ class InventoryBox:
     def render(self, screen):
         self.box = pygame.image.load(f'image/dialogue/{self.name}.png')
         screen.blit(self.box, (self.X_POSITION, self.Y_POSITION))
+
+class WinBox:
+
+    X_POSITION = 350
+    Y_POSITION = 250
+
+    def __init__(self):
+        self.text = "YOU"
+        self.text2 = "WIN"
+        self.font = pygame.font.Font("image/dialogue/OGYIGO.ttf", 90)
+
+    def render(self, screen):
+        text = self.font.render(self.text, False, (255, 215, 0))
+        screen.blit(text, (self.X_POSITION, self.Y_POSITION))
+        text2 = self.font.render(self.text2, False, (255, 215, 0))
+        screen.blit(text2, (self.X_POSITION, self.Y_POSITION + 100))

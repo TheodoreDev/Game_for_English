@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="14" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="19">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="14" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="22">
  <tileset firstgid="1" source="../Jeu de tuiles (.tsx)/house-building.tsx"/>
  <tileset firstgid="257" source="../Jeu de tuiles (.tsx)/1620294938-house.tsx"/>
  <tileset firstgid="1032" source="../Jeu de tuiles (.tsx)/terrain_3.tsx"/>
@@ -159,6 +159,7 @@
   <object id="13" type="collision" x="223.625" y="63.625" width="6.125" height="192.75"/>
   <object id="14" type="collision" x="0.333333" y="256" width="224.667" height="7.33333"/>
   <object id="15" name="enter_ville" x="96.9091" y="241.182" width="30.2727" height="13.2727"/>
+  <object id="21" name="dialogueNPC" x="96.25" y="187.25" width="8.25" height="38.75"/>
  </objectgroup>
  <objectgroup id="10" name="spawn">
   <object id="16" name="spawn_tool" x="100.455" y="201.636">
@@ -167,5 +168,6 @@
  </objectgroup>
  <objectgroup id="11" name="NPC_path">
   <object id="17" name="boche(lino)_path1" x="175.909" y="80.0909" width="16.4545" height="16"/>
+  <object id="19" name="robin_path1" x="32.75" y="192.5" width="15.625" height="15.5"/>
  </objectgroup>
 </map>

@@ -93,7 +93,7 @@ class MapManager:
                                                       "Everything you want !",
                                                       "Ok, go find shoes in a field",
                                                       "next to the city,",
-                                                      "A screwdriver in the tool shop of the city,",
+                                                      "A green screwdriver in the tool shop of the city,",
                                                       "And a car in the parking of the city",
                                                       "The city is in the south.",
                                                       "Ok",

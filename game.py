@@ -53,6 +53,8 @@ class Game:
             self.location_box.text = "         City"
         elif self.map_manager.current_map == "parking":
             self.location_box.text = "     Parking"
+        elif self.map_manager.current_map == "tool_shop":
+            self.location_box.text = "DIY tool shop"
         self.map_manager.check_dialogBox_collision(self.dialog_box2)
         self.map_manager.check_dialogBox3_collision(self.dialog_box3)
         self.map_manager.check_dialogBox4_collision(self.dialog_box4)
@@ -74,13 +76,13 @@ class Game:
             self.inventory_box.name = "HUD_obj0"
         if self.dialog_box_obj.dialog_read_camaro == True and self.dialog_box_obj.dialog_read_bosch == True and self.dialog_box_obj.dialog_read_shoes == True:
             self.dialog_box_npc.texts = ["Wow !!",
-                                         "You got all the object.",
+                                         "You got all the objects.",
                                          "Now, I can repair the portal,",
                                          "And you can go back in your origin world !"]
         elif self.dialog_box_npc.dialog_read == True:
             self.dialog_box_npc.texts = ["Go find shoes in a field ",
                                          "next to the city,",
-                                         "A screwdriver in the tool shop of the city,",
+                                         "A green screwdriver in the tool shop of the city,",
                                          "And a car in the parking of the city.",
                                          "The city is in the south."]
 
